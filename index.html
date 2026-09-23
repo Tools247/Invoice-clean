@@ -8,13 +8,13 @@
   <meta name="keywords" content="free invoice generator, saas invoice, online invoice maker, no signup invoice, professional invoice template, pdf invoice generator">
   <meta name="author" content="InvoiceClean">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://tools247.github.io/Invoice-clean/">
+  <link rel="canonical" href="https://invoiceclean.com/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Free Invoice Generator – Create Professional SaaS Invoices Instantly">
   <meta property="og:description" content="Clean, modern invoices in 60 seconds. No signup. No tracking. Download PDF instantly.">
-  <meta property="og:url" content="https://tools247.github.io/Invoice-clean/">
+  <meta property="og:url" content="https://invoiceclean.com/">
   <meta property="og:site_name" content="InvoiceClean">
 
   <!-- Twitter -->
@@ -29,33 +29,6 @@
 /* InvoiceClean - Modern SaaS Invoice Generator */
 
 :root {
-  --bg: #f8fafc;
-  --bg-card: #ffffff;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --accent: #0ea5e9;
-  --success: #10b981;
-  --radius: 12px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a;
-    --bg-card: #1e293b;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
-    --border: #334155;
-    --primary: #3b82f6;
-    --primary-hover: #60a5fa;
-  }
-}
-
-[data-theme="dark"] {
   --bg: #0f172a;
   --bg-card: #1e293b;
   --text: #f1f5f9;
@@ -63,16 +36,11 @@
   --border: #334155;
   --primary: #3b82f6;
   --primary-hover: #60a5fa;
-}
-
-[data-theme="light"] {
-  --bg: #f8fafc;
-  --bg-card: #ffffff;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --accent: #0ea5e9;
+  --success: #10b981;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.4), 0 8px 10px -6px rgba(0,0,0,0.4);
 }
 
 * {
@@ -155,21 +123,19 @@ a:hover {
   color: var(--primary);
 }
 
-.theme-toggle {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.4rem 0.6rem;
-  cursor: pointer;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.theme-toggle:hover {
-  background: var(--bg);
-  color: var(--text);
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 0.75rem 1rem;
+  }
+  .logo {
+    font-size: 1.05rem;
+  }
+  .nav {
+    gap: 0.85rem;
+  }
+  .nav a {
+    font-size: 0.8125rem;
+  }
 }
 
 /* Main layout */
@@ -211,6 +177,12 @@ a:hover {
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 1.1rem;
+  }
 }
 
 .card h2 {
@@ -392,6 +364,12 @@ a:hover {
   top: 80px;
 }
 
+@media (max-width: 900px) {
+  .preview-card {
+    position: static;
+  }
+}
+
 .invoice-preview {
   background: white;
   color: #0f172a;
@@ -442,6 +420,33 @@ a:hover {
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 480px) {
+  .invoice-preview {
+    padding: 1.25rem;
+    font-size: 0.8125rem;
+  }
+  .inv-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .inv-meta {
+    text-align: left;
+  }
+  .inv-parties {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .inv-table th,
+  .inv-table td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.8rem;
+  }
+  .inv-totals {
+    width: 100%;
+    max-width: 220px;
+  }
 }
 
 .inv-party h4 {
@@ -642,7 +647,7 @@ a:hover {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "InvoiceClean",
-    "url": "https://tools247.github.io/Invoice-clean/",
+    "url": "https://invoiceclean.com/",
     "description": "Free online invoice generator for SaaS founders and small businesses. Create professional PDF invoices with no signup required.",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any",
@@ -663,9 +668,6 @@ a:hover {
         <a href="templates.html">Templates</a>
         <a href="about.html">About</a>
         <a href="privacy.html">Privacy</a>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </button>
       </nav>
     </div>
   </header>
@@ -1240,20 +1242,6 @@ a:hover {
     if ($('#notes')) $('#notes').value = state.notes;
   }
 
-  // ---------- Theme ----------
-  function initTheme() {
-    const saved = localStorage.getItem('invoiceclean_theme');
-    if (saved) {
-      document.documentElement.setAttribute('data-theme', saved);
-    }
-    $('#theme-toggle')?.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('invoiceclean_theme', next);
-    });
-  }
-
   // ---------- Init ----------
   function init() {
     loadDraft();
@@ -1261,7 +1249,6 @@ a:hover {
     renderLineItems();
     renderPreview();
     bindInputs();
-    initTheme();
 
     // Apply template from URL if present
     const params = new URLSearchParams(window.location.search);
