@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://invoiceclean.com/sitemap.xml
+Sitemap: https://tools247.github.io/Invoice-clean/sitemap.xml
