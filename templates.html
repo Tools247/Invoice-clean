@@ -630,6 +630,25 @@ a:hover {
   clip: rect(0,0,0,0);
   border: 0;
 }
+
+/* Print fallback: isolate just the invoice when the user prints/saves as PDF */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .invoice-preview,
+  .invoice-preview * {
+    visibility: visible;
+  }
+  .invoice-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
 </style>
 </head>
 <body>

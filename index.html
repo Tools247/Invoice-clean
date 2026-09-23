@@ -639,6 +639,25 @@ a:hover {
   clip: rect(0,0,0,0);
   border: 0;
 }
+
+/* Print fallback: isolate just the invoice when the user prints/saves as PDF */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .invoice-preview,
+  .invoice-preview * {
+    visibility: visible;
+  }
+  .invoice-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
 </style>
 
   <!-- Structured Data -->
@@ -1096,6 +1115,12 @@ a:hover {
     const btn = $('#download-pdf');
     if (!btn) return;
     const originalText = btn.innerHTML;
+
+    if (typeof window.html2canvas !== 'function' || !window.jspdf) {
+      alert('PDF tools failed to load (check your internet connection or ad-blocker), please refresh and try again.');
+      return;
+    }
+
     btn.innerHTML = 'Generating…';
     btn.disabled = true;
 
@@ -1104,12 +1129,18 @@ a:hover {
       const element = $('#invoice-preview');
       if (!element) throw new Error('Preview not found');
 
-      // Ensure white background for PDF
+      // Ensure white background for PDF; scrollX/Y compensate for
+      // elements inside a position:sticky ancestor being captured
+      // at the wrong offset once the page has been scrolled.
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
-        logging: false
+        logging: false,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        windowWidth: document.documentElement.scrollWidth,
+        windowHeight: document.documentElement.scrollHeight
       });
 
       const imgData = canvas.toDataURL('image/png');
@@ -1142,7 +1173,7 @@ a:hover {
       pdf.save(filename);
     } catch (err) {
       console.error(err);
-      alert('Could not generate PDF. Please try again or use Print → Save as PDF.');
+      alert('Could not generate PDF (' + (err && err.message ? err.message : 'unknown error') + '). Please try again or use Print → Save as PDF.');
     } finally {
       btn.innerHTML = originalText;
       btn.disabled = false;
